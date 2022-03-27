@@ -21,16 +21,12 @@ $(function () {
   // 获取聊天机器人发送回来的消息
   function getMsg(text) {
     $.ajax({
-      method: 'GET',
-      url: 'http://www.liulongbin.top:3006/api/robot',
-      data: {
-        spoken: text
-      },
-      success: function (res) {
-        // console.log(res)
-        if (res.message === 'success') {
+      url: 'http://www.liulongbin.top:3006/api/robot?spoken='+text,
+      dataType:'jonsp',
+      error: function (error) {
+        if (JSON.parse(error.responseText).message === 'success') {
           // 接收聊天消息
-          var msg = res.data.info.text
+          var msg = JSON.parse(error.responseText).data.info.text
           $('#talk_list').append('<li class="left_word"><img src="img/person01.jpg" /> <span>' + msg + '</span></li>')
           // 重置滚动条的位置
           resetui()
@@ -44,13 +40,13 @@ $(function () {
   // 把文字转化为语音进行播放
   function getVoice(text) {
     $.ajax({
-      url: 'http://www.liulongbin.top:3006/api/synthesize',
-      dataType: 'jsonp',
-      success: function (res) {
+      url: 'http://www.liulongbin.top:3006/api/synthesize?text='+text,
+      dataType:'jonsp',
+      error: function (error) {
         // console.log(res)
-        if (res.status === 200) {
+        if (JSON.parse(error.responseText).status === 200) {
           // 播放语音
-          $('#voice').attr('src', res.voiceUrl)
+          $('#voice').attr('src', JSON.parse(error.responseText).voiceUrl)
         }
       }
     })
