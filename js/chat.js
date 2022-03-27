@@ -21,7 +21,7 @@ $(function () {
   // 获取聊天机器人发送回来的消息
   function getMsg(text) {
     $.ajax({
-      url: '//www.liulongbin.top:3006/api/robot?spoken='+text,
+      url: 'http://www.liulongbin.top:3006/api/robot?spoken='+text,
       dataType:'jonsp',
       error: function (error) {
         if (JSON.parse(error.responseText).message === 'success') {
@@ -40,7 +40,7 @@ $(function () {
   // 把文字转化为语音进行播放
   function getVoice(text) {
     $.ajax({
-      url: '//www.liulongbin.top:3006/api/synthesize?text='+text,
+      url: 'http://www.liulongbin.top:3006/api/synthesize?text='+text,
       dataType:'jonsp',
       error: function (error) {
         // console.log(res)
