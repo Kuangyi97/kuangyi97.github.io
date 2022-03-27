@@ -44,11 +44,8 @@ $(function () {
   // 把文字转化为语音进行播放
   function getVoice(text) {
     $.ajax({
-      method: 'GET',
       url: 'http://www.liulongbin.top:3006/api/synthesize',
-      data: {
-        text: text
-      },
+      dataType: 'jsonp',
       success: function (res) {
         // console.log(res)
         if (res.status === 200) {
